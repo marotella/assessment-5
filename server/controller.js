@@ -227,5 +227,13 @@ module.exports = {
             console.log('DB seeded!')
             res.sendStatus(200)
         }).catch(err => console.log('error seeding DB', err))
+    },
+    getCountries : (req, res) => {
+        const query = `SELECT * from countries`
+        sequelize.query(query)
+        .then((dbRes) => {
+            res.status(200).send(dbRes[0])
+        }).catch(err => console.log("error getting data", err))
+
     }
 }
