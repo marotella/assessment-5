@@ -235,5 +235,18 @@ module.exports = {
             res.status(200).send(dbRes[0])
         }).catch(err => console.log("error getting data", err))
 
+    },
+    createCity : (req, res) => {
+        console.log(req.body)
+        const {name, rating, countryId} = req.body;
+        // console.log(name)
+        // console.log(rating)
+        // console.log(countryid)
+        const query = `INSERT INTO cities (name, rating, country_id) VALUES ('${name}', ${rating}, ${countryId})`
+        sequelize.query(query)
+        .then(dbRes => {
+            console.log(dbRes[0])
+            res.status(200).send("Successfully added city")
+        }).catch (err => console.log("error adding city", err))
     }
 }
