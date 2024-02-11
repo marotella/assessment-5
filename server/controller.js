@@ -248,5 +248,14 @@ module.exports = {
             console.log(dbRes[0])
             res.status(200).send("Successfully added city")
         }).catch (err => console.log("error adding city", err))
+    },
+    getCities : (req, res) =>{
+        console.log(req)
+        const query = `SELECT cities.city_id, cities.name as city, cities.rating, countries.country_id, countries.name as country FROM cities JOIN countries ON cities.country_id = countries.country_id `
+        sequelize.query(query)
+        .then(dbRes => {
+            console.log(dbRes[0])
+            res.status(200).send(dbRes[0])
+        }).catch(err => console.log("error retrieving all cities", err))
     }
 }
